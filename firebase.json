@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",          // ← vaihda oikeaksi build-kansioksi esim. "web-build" tai "dist"
+    "public": "dist",          // ← vaihda oikeaksi build-kansioksi esim. "web-build" tai "dist"
     "ignore": [
       "firebase.json",
       "**/.*",
