@@ -1,2 +1,2 @@
-// TiksiHehku app entry point
+// TiksiHehku pääsovellus
 console.log('Tervetuloa TiksiHehkuun');
