@@ -1,2 +1,2 @@
-// TiksiHehku pääsovellus
+// TiksiHehku App
 console.log('Tervetuloa TiksiHehkuun');
