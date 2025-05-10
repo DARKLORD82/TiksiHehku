@@ -1,6 +1,9 @@
 {
+  "projects": {
+    "default": "tiksihehku"
+  },
   "hosting": {
-    "public": "public",
+    "public": "web-build",
     "ignore": [
       "firebase.json",
       "**/.*",
