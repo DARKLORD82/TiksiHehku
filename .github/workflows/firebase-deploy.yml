@@ -13,16 +13,10 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: |
-        cd TiksiHehku
-        npm install
+      run: npm install
 
     - name: Build project
-      run: |
-        cd TiksiHehku
-        npm run build
+      run: npm run build
 
     - name: Deploy to Firebase
-      run: |
-        cd TiksiHehku
-        firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+      run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
