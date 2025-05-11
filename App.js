@@ -38,7 +38,7 @@ function LoginScreen({ onLogin }) {
 }
 
 function HomeScreen() {
-  return <SafeAreaView style={styles.screen}><Text style={styles.text}>🏠 Koti – TiksiHehku</Text></SafeAreaView>;
+  return <SafeAreaView style={styles.screen}><Text style={styles.text}>🏠 Etusivu – TiksiHehku Web</Text></SafeAreaView>;
 }
 function LiveScreen() {
   return <SafeAreaView style={styles.screen}><Text style={styles.text}>📺 Live-lähetys</Text></SafeAreaView>;
