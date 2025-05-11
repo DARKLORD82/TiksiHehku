@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import { View, Text } from 'react-native';
 
@@ -9,10 +8,3 @@ export default function App() {
     </View>
   );
 }
-=======
-HEAD
-// Firebase Auth + Navigaatio TiksiHehku
-// Täydellinen versio ladattavaksi – sisältää drawerin, kirjautumisen ja näkymät.
-// TiksiHehku App
-console.log('Tervetuloa TiksiHehkuun');
->>>>>>> c23f106c75cd1894a31c73e1dd07f0d99594ca02
