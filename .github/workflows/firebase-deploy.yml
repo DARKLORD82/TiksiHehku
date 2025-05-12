@@ -1,4 +1,4 @@
-name: Deploy to Firebase Hosting on merge
+name: Deploy Expo Web to Firebase Hosting
 
 on:
   push:
@@ -6,20 +6,18 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install dependencies
-      run: npm install
+      - run: npm install -g expo-cli
+      - run: npm install --legacy-peer-deps
+      - run: expo export --platform web
 
-    - name: Build project
-    - run: expo export --platform web
-
-    - name: Install Firebase CLI
-      run: npm install -g firebase-tools
-
-    - name: Deploy to Firebase
-      run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --project tiksihehku
+      - run: npm install -g firebase-tools
+      - run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
