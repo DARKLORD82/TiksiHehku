@@ -3,7 +3,7 @@
     "default": "tiksihehku"
   },
   "hosting": {
-    "public": "web-build",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -14,6 +14,4 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ]
-  }
 }
