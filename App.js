@@ -90,12 +90,3 @@ const styles = StyleSheet.create({
   screen: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   text: { fontSize: 22 }
 });
-{
-  "expo": {
-    "name": "TiksiHehku",
-    "slug": "tiksihehku",
-    "platforms": ["ios", "android", "web"],
-    "version": "1.0.0",
-    "sdkVersion": "53.0.0"
-  }
-}
