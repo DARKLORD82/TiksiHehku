@@ -2,6 +2,7 @@
   "name": "tiksihehku",
   "version": "1.0.0",
   "main": "App.js",
+  "platforms": ["ios", "android", "web"],
   "scripts": {
     "start": "expo start",
     "build": "expo export:web"
@@ -21,6 +22,5 @@
     "react-native-screens": "^4.10.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.18.10"
-    "platforms": ["ios", "android", "web"],
   }
 }
