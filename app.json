@@ -4,6 +4,6 @@
     "slug": "tiksihehku",
     "version": "1.0.0",
     "sdkVersion": "53.0.0",
-    "platforms": ["ios", "android", "web",]
+    "platforms": ["ios", "android", "web" ,]
   }
 }
