@@ -10,6 +10,7 @@
     "@expo/webpack-config": "^18.0.1",
     "@react-navigation/drawer": "^7.3.12",
     "@react-navigation/native": "^7.1.9",
+    "platforms": ["ios", "android", "web"],
     "expo": "~53.0.0",
     "firebase": "^11.7.1",
     "react": "^18.2.0",
