@@ -61,7 +61,7 @@ export default function App() {
     const unsub = onAuthStateChanged(auth, setUser);
     return () => unsub();
   }, []);
-  if (!user) return <LoginScreen onLogin={() => {}} />;
+  if (!user) return <LoginScreen onLogin={() => setUser(true)} />;
   return (
     <NavigationContainer>
       <Drawer.Navigator
