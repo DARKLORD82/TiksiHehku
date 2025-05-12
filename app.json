@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "TiksiHehku",
+    "slug": "tiksihehku",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.0.0",
+    "sdkVersion": "53.0.0"
+  }
+}
