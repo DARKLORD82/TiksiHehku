@@ -5,7 +5,7 @@
   "platforms": ["ios", "android", "web"],
   "scripts": {
     "start": "expo start",
-    "build": "expo export:web"
+    "build": "expo export --platform web"
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
