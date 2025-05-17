@@ -55,7 +55,7 @@ function ProfileScreen({ onLogout }) {
   );
 }
 
-export default function App() {
+export default App;
   const [user, setUser] = useState(null);
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, setUser);
