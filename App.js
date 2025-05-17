@@ -68,10 +68,19 @@ export default function App()
   if (!user) {
     console.log("Rendering login screen");
     return <LoginScreen onLogin={() => setUser(true)} />;
+  console.log("Rendering navigation drawer...");
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        screenOptions={{
+        <Drawer.Screen name="Koti" component={HomeScreen} />
+        <Drawer.Screen name="Live" component={LiveScreen} />
+        <Drawer.Screen name="Chat" component={ChatScreen} />
+        <Drawer.Screen name="Profiili" children={() => <ProfileScreen onLogout={() => signOut(auth)} />} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+      screenOptions={{
           drawerType: 'front',
           drawerStyle: { backgroundColor: '#001F3F', width: 90 },
           drawerActiveTintColor: '#fff',
