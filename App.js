@@ -55,13 +55,19 @@ function ProfileScreen({ onLogout }) {
   );
 }
 
-export default function App() {
+export default function App() 
  const [user, setUser] = useState(null);
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, setUser);
+    console.log("Checking user authentication...");
+    const unsub = onAuthStateChanged(auth, setUser); => { 
+      console.log("User state changed:", user);
+      setUser(user);
+    });
     return () => unsub();
   }, []);
-  if (!user) return <LoginScreen onLogin={() => setUser(true)} />;
+  if (!user) {
+    console.log("Rendering login screen");
+    return <LoginScreen onLogin={() => setUser(true)} />;
   return (
     <NavigationContainer>
       <Drawer.Navigator
