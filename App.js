@@ -27,6 +27,11 @@ function LoginScreen({ onLogin }) {
   };
 
   return (
+     <View>
+      <Text style={{ fontSize: 24, color: "blue" }}>Expo Web is working! 🎉</Text>
+    </View>
+  );
+}
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>{isNew ? 'Rekisteröidy' : 'Kirjaudu sisään'}</Text>
       <TextInput style={styles.input} placeholder="Sähköposti" value={email} onChangeText={setEmail} />
@@ -56,6 +61,7 @@ function ProfileScreen({ onLogout }) {
 }
 
 export default function App() 
+ console.log("Rendering App component...");
  const [user, setUser] = useState(null);
   useEffect(() => {
     console.log("Checking user authentication...");
@@ -69,6 +75,7 @@ export default function App()
     console.log("Rendering login screen");
     return <LoginScreen onLogin={() => setUser(true)} />;
   console.log("Rendering navigation drawer...");
+  console.log("🚀 Expo Web is running!");  
   return (
     <NavigationContainer>
       <Drawer.Navigator
