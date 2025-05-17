@@ -2,8 +2,21 @@
   "expo": {
     "name": "TiksiHehku",
     "slug": "tiksihehku",
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
-    "sdkVersion": "53.0.0",
-    "platforms": ["web",  "ios", "android"]
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }
