@@ -55,7 +55,9 @@ function ProfileScreen({ onLogout }) {
   );
 }
 
-export default App;
+export default function App() {
+  return <h1 style={{ color: 'red' }}>Hello, Expo Web!</h1>;
+}
   const [user, setUser] = useState(null);
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, setUser);
