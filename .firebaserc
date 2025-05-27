@@ -1,5 +1,8 @@
 {
   "projects": {
+    "tiksihehku": "tiksihehku",
     "default": "tiksihehku"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

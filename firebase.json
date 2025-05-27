@@ -1,9 +1,6 @@
 {
-  "projects": {
-    "default": "tiksihehku"
-  },
   "hosting": {
-    "public": "dist",
+    "public": "web-build",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -15,5 +12,8 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

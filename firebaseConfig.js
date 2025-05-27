@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyXXXX...",
+  apiKey: "AIzaSyBFPzcmxBpZJ_O8tWVsW3GN8V5UjNAJgAc",
   authDomain: "tiksihehku.firebaseapp.com",
   projectId: "tiksihehku",
   storageBucket: "tiksihehku.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdefgh1234"
+  messagingSenderId: "141285539616",
+  appId: "1:141285539616:web:ed42f9adb41a6b27b9e145"
 };
