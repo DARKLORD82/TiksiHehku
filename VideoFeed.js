@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Button, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { collection, getDocs, doc, updateDoc, increment, arrayUnion } from 'firebase/firestore';
-import { storage } from './firebase';
-import { db } from './firebase';
+import { db, storage } from './firebaseApp';
 import { Video } from 'expo-av';
 import { useNavigation } from '@react-navigation/native';
 

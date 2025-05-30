@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, Button, TextInput, StyleSheet } from 'react-native';
 import { auth } from './firebase';
@@ -7,17 +6,6 @@ import { db } from './firebase';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { storage } from './firebase';
 import ChangeProfilePicture from './ChangeProfilePicture';
-
-{isOwnProfile && (
-  <>
-    <ChangeProfilePicture onUploadSuccess={() => {
-      // Hae uusi kuva uudelleen
-      setPhotoURL(null);
-    }} />
-  </>
-)}
-
-
 
 export default function UserProfile({ route }) {
   const [userData, setUserData] = useState(null);
@@ -28,30 +16,32 @@ export default function UserProfile({ route }) {
 
   const userId = route?.params?.userId || auth.currentUser?.uid;
   const currentUserId = auth.currentUser?.uid;
+  const isOwnProfile = userId === currentUserId;
+
+  const fetchData = async () => {
+    const docRef = doc(db, 'users', userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      setUserData(data);
+      setNewName(data.name || '');
+      if (data.photoPath) {
+        const url = await getDownloadURL(ref(storage, data.photoPath));
+        setPhotoURL(url);
+      }
+    }
+
+    if (userId !== currentUserId) {
+      const currentUserRef = doc(db, 'users', currentUserId);
+      const currentUserSnap = await getDoc(currentUserRef);
+      if (currentUserSnap.exists()) {
+        const currentUserData = currentUserSnap.data();
+        setIsFollowing(currentUserData.following?.includes(userId));
+      }
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const docRef = doc(db, 'users', userId);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        setUserData(data);
-        setNewName(data.name || '');
-        if (data.photoPath) {
-          const url = await getDownloadURL(ref(storage, data.photoPath));
-          setPhotoURL(url);
-        }
-      }
-
-      if (userId !== currentUserId) {
-        const currentUserRef = doc(db, 'users', currentUserId);
-        const currentUserSnap = await getDoc(currentUserRef);
-        if (currentUserSnap.exists()) {
-          const currentUserData = currentUserSnap.data();
-          setIsFollowing(currentUserData.following?.includes(userId));
-        }
-      }
-    };
     fetchData();
   }, [userId]);
 
@@ -70,11 +60,16 @@ export default function UserProfile({ route }) {
     setIsFollowing(!isFollowing);
   };
 
-  const isOwnProfile = userId === currentUserId;
-
   return (
     <View style={styles.container}>
       {photoURL && <Image source={{ uri: photoURL }} style={styles.avatar} />}
+      
+      {isOwnProfile && (
+        <ChangeProfilePicture onUploadSuccess={() => {
+          // Päivitä kuva uusiksi
+          fetchData();
+        }} />
+      )}
 
       {editing ? (
         <TextInput
@@ -88,15 +83,13 @@ export default function UserProfile({ route }) {
 
       <Text style={styles.email}>{userData?.email}</Text>
 
-      {isOwnProfile && (
+      {isOwnProfile ? (
         editing ? (
           <Button title="Tallenna" onPress={handleSave} />
         ) : (
           <Button title="Muokkaa nimeä" onPress={() => setEditing(true)} />
         )
-      )}
-
-      {!isOwnProfile && (
+      ) : (
         <Button
           title={isFollowing ? 'Lopeta seuraaminen' : 'Seuraa käyttäjää'}
           onPress={handleFollow}

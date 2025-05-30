@@ -1,66 +1,57 @@
-
-import React, { useState } from 'react';
-import { View, Button, Text, StyleSheet, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, Button, Platform } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
-import { auth } from './firebase';
-import { db } from './firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { storage, db, auth } from './firebaseApp';
 
 export default function UploadVideo() {
-  const [video, setVideo] = useState(null);
-
-  const pickVideo = async () => {
-    const result = await DocumentPicker.getDocumentAsync({
-      type: 'video/*',
-      copyToCacheDirectory: true
-    });
-
-    if (!result.canceled) {
-      setVideo(result.assets[0]);
-    }
-  };
-
-  const uploadVideo = async () => {
-    if (!video) return;
-
+  const handlePickAndUpload = async () => {
     try {
-      const response = await fetch(video.uri);
-      const blob = await response.blob();
-      const uid = auth.currentUser?.uid;
-      const timestamp = Date.now();
-      const filePath = `videos/${uid}/${timestamp}_${video.name}`;
-      const storageRef = ref(getStorage(), filePath);
-
-      await uploadBytes(storageRef, blob);
-
-      await addDoc(collection(db, 'videos'), {
-        userId: uid,
-        filePath,
-        originalName: video.name,
-        createdAt: serverTimestamp(),
-        likes: 0,
-        comments: []
+      const result = await DocumentPicker.getDocumentAsync({
+        type: 'video/*',
+        copyToCacheDirectory: true,
       });
 
-      Alert.alert('Onnistui', 'Video ladattu onnistuneesti!');
-      setVideo(null);
+      if (result.type === 'cancel') return;
+
+      const fileUri = result.uri;
+      const fileName = `${Date.now()}_${result.name}`;
+      const fileRef = ref(storage, `videos/${fileName}`);
+
+      const response = await fetch(fileUri);
+      const blob = await response.blob();
+
+      const uploadTask = uploadBytesResumable(fileRef, blob);
+
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        error => {
+          console.error('Upload failed:', error);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          await addDoc(collection(db, 'videos'), {
+            url: downloadURL,
+            userId: auth.currentUser?.uid || null,
+            createdAt: serverTimestamp(),
+          });
+          alert('✅ Video uploaded!');
+        }
+      );
     } catch (error) {
-      console.error(error);
-      Alert.alert('Virhe', 'Videon lataus epäonnistui');
+      console.error('Upload error:', error);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Button title="Valitse video" onPress={pickVideo} />
-      {video && <Text style={styles.info}>Valittu: {video.name}</Text>}
-      <Button title="Lataa video" onPress={uploadVideo} disabled={!video} />
+    <View style={{ padding: 20 }}>
+      <Text style={{ fontSize: 18, marginBottom: 10 }}>🎬 Upload Video</Text>
+      <Button title="Pick and Upload Video" onPress={handlePickAndUpload} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { padding: 20 },
-  info: { marginVertical: 10, fontSize: 14 }
-});
