@@ -18,7 +18,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.TiksiHehku.TiksiHehku"
+      "bundleIdentifier": "com.TiksiHehku.TiksiHehku",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.TiksiHehku.TiksiHehku",
@@ -31,6 +34,7 @@
       "eas": {
         "projectId": "4096e324-34ec-4d29-9165-8a89a476a356"
       }
-    }
+    },
+    "owner": "dark82"
   }
 }
