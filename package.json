@@ -10,9 +10,7 @@
     "export": "expo export --platform web"
   },
   "dependencies": {
-    "@expo/config-plugins": "~10.0.0",
     "@expo/metro-runtime": "~5.0.4",
-    "@expo/prebuild-config": "~9.0.0",
     "@livekit/components-react": "^2.9.9",
     "@livekit/components-styles": "^1.1.6",
     "@livekit/react-native": "^2.7.4",
@@ -36,7 +34,7 @@
     "expo-router": "~5.0.7",
     "expo-status-bar": "~2.2.3",
     "express": "^5.1.0",
-    "firebase": "^11.8.1",
+    "firebase": "^11.9.0",
     "i18n-js": "^3.8.0",
     "install": "^0.13.0",
     "livekit-client": "^2.13.3",
@@ -45,6 +43,7 @@
     "react-dom": "19.0.0",
     "react-native": "^0.79.3",
     "react-native-gesture-handler": "~2.24.0",
+    "react-native-get-random-values": "^1.11.0",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
@@ -52,6 +51,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@expo/config-plugins": "~10.0.0",
+    "@expo/prebuild-config": "~9.0.0",
     "@types/react": "~19.0.10",
     "typescript": "^5.3.3"
   },
