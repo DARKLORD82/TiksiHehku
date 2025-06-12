@@ -1,0 +1,1 @@
+// Videon lähetyskomponentti placeholder
