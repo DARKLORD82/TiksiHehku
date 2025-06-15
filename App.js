@@ -1,4 +1,7 @@
 // App.js
+
+import { auth } from './firebaseApp';
+console.log("🔥 Auth loaded:", auth);
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';

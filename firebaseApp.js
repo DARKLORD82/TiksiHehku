@@ -1,33 +1,29 @@
 // firebaseApp.js
-import { initializeApp, getApps } from 'firebase/app';
-import { getAuth, initializeAuth, getReactNativePersistence } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform } from 'react-native';
-import firebaseConfig from './firebaseConfig';
+import { getFirestore } from 'firebase/firestore';
+// (voit tuoda myös muita Firebase-palveluita tarpeen mukaan, esim getStorage yms.)
 
-let app;
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApps()[0];
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBFPzcmxBpZJ_O8tWVsW3GN8V5UjNAJgAc",
+  authDomain: "tiksihehku.firebaseapp.com",
+  projectId: "tiksihehku",
+  storageBucket: "tiksihehku.appspot.com",
+  messagingSenderId: "141285539616",
+  appId: "1:141285539616:web:ed42f9adb41a6b27b9e145"
 }
 
-let auth;
-if (Platform.OS === 'web') {
-  auth = getAuth(app);
-} else {
-  try {
-    auth = initializeAuth(app, {
-      persistence: getReactNativePersistence(AsyncStorage),
-    });
-  } catch (e) {
-    auth = getAuth(app); // fallback jos jo alustettu
-  }
-}
+// Alusta Firebase App (jos ei jo alustettu)
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
-const storage = getStorage(app);
+// Alusta Firebase Auth moduuli AsyncStorage-persistenssillä (Expo/Hermes)
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage)
+});
 
-export { app, auth, db, storage };
+// Alusta Firestore (esimerkkinä, tämä latautuu normaalisti)
+export const db = getFirestore(app);
+
+// (Tarvittaessa voit alustaa muita palveluita, esim. export const storage = getStorage(app); )
